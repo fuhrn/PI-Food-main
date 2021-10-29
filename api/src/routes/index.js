@@ -1,7 +1,7 @@
 const { Router } = require('express');
-const { Recipe, Diet} = require('../db')
+const { Recipe, Diet } = require('../db')
 require('dotenv').config();
-const {API_KEY} = process.env
+const { API_KEY } = process.env
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 const model = require('../apiInfo/allData')
@@ -9,22 +9,27 @@ const model = require('../apiInfo/allData')
 const router = Router();
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
-console.log(model)
 
 router.get('/recipes', async (req, res, next) => {
-    // 1 - guardar las recetas de la api
-    // 2- guardar las recetas de la bdd
-    // 3- concatenar
-    // 4 - filtrar segun el nombre de la receta pasado por query
-    try{
-        const apiinfo = await model.allApiData()
-        res.send(apiinfo)
-    }catch(error){
-        next(error)
+    const { name } = req.query;
+    const recipes = await model.allData()
+    if (name) {
+        try {
+            let recipeQuery = await recipes.filter( r => r.name.toLowerCase().includes(name.toLowerCase()));
+            recipeQuery.length ?
+            res.send(recipeQuery) :
+            res.send('No existen recetas con ese nombre :(')
+        } catch (error) {
+            next(error)
+        }
+    } else {
+        res.send(recipes)
     }
 });
+
+
 router.post('/recipes', async (req, res) => {
-    const {name} = req.body
+    const { name } = req.body
     const newRecipe = await Diet.create({
         name
     })
