@@ -1844,4 +1844,10 @@ const apitrucha = {
     "number": 10,
     "totalResults": 5076
 };
+
+const allDiets = function(){
+    const repeated = apitrucha.results.map( d => d.diets).flat(1);
+    return [... new Set(repeated)] // que cosa bella por dios
+}
+//exportar esta funcion (desde allData) para precargar la BD
 module.exports = apitrucha;

@@ -2,6 +2,7 @@ const { Router } = require('express');
 const { Recipe, Diet } = require('../db')
 require('dotenv').config();
 const { API_KEY } = process.env
+const axios = require('axios');
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 const model = require('../apiInfo/allData')
@@ -15,10 +16,10 @@ router.get('/recipes', async (req, res, next) => {
     const recipes = await model.allData()
     if (name) {
         try {
-            let recipeQuery = await recipes.filter( r => r.name.toLowerCase().includes(name.toLowerCase()));
+            let recipeQuery = await recipes.filter(r => r.name.toLowerCase().includes(name.toLowerCase()));
             recipeQuery.length ?
-            res.send(recipeQuery) :
-            res.send('No existen recetas con ese nombre :(')
+                res.send(recipeQuery) :
+                res.send('No existen recetas con ese nombre :(')
         } catch (error) {
             next(error)
         }
@@ -27,18 +28,25 @@ router.get('/recipes', async (req, res, next) => {
     }
 });
 
+// precargar primero la bd con los tipos de dieta
+/* router.get('/recipes/:id', async (req, res, next) => {
+    const {id} = req.params;
+    
+    // hacer un concat con los tipos de dieta?
+    res.send()
 
-router.post('/recipes', async (req, res) => {
-    const { name } = req.body
-    const newRecipe = await Diet.create({
-        name
-    })
-    res.send(newRecipe)
-});
+}); */
 
-// /recipes?name=${name}
-
-// `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&number=10&addRecipeInformation=true`
+router.get('/types', async (req, res, next) => {
+    try {
+        const diets = await model.allDiets();
+        diets.length ?
+        res.send(diets) :
+        res.send('no se encontraron dietas')
+    } catch(e){
+        next(e)
+    }
+})
 
 // - [ ] __GET /recipes?name="..."__:
 //   - Obtener un listado de las recetas que contengan la palabra ingresada como query parameter
