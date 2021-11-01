@@ -23,7 +23,7 @@ const model = require('./src/apiInfo/allData.js');
 
 // la funcion allDiets me devuelve un arreglo con todas las dietas de la api
 // cargar la bd con un findOrCreate
-
+// LISTO
 const dietLoader = async function(){
   const dietsApi = await model.allDiets();
   try{
@@ -40,7 +40,7 @@ const dietLoader = async function(){
 }
 
 // Syncing all the models at once.
-conn.sync({ force: false }).then(() => {
+conn.sync({ force: true }).then(() => {
   server.listen(3001, () => {
 
     dietLoader();
