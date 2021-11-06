@@ -67,32 +67,19 @@ router.post('/recipe', async (req, res) => {
         "healthy food level": healthScore,
         "step by step": stepByStep
     });
-    const dbDiet = await Diet.findAll({
-        where: {
-            name: diets
-        }
-    });
-    newRecipe.addDiet(dbDiet);
+    diets.map( async d => {
+        const dbDiet = await Diet.findOrCreate({
+            where: {
+                name: d
+            }
+        })
+        console.log('este es el dbDiet', dbDiet)
+        newRecipe.addDiet(dbDiet[0]);
+    })
     res.send('¡Receta creada con éxito!')
 });
 // RECORDAR CAMBIAR EL FORCE A TRUE ANTE CAMBIOS EN LA BDD !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
 
-// - [ ] __GET /recipes?name="..."__:              // LISTO --> checkeado 
-//   - Obtener un listado de las recetas que contengan la palabra ingresada como query parameter
-//   - Si no existe ninguna receta mostrar un mensaje adecuado
-
-// - [ ] __GET /recipes/{idReceta}__:            // LISTO --> checkeado
-//   - Obtener el detalle de una receta en particular
-//   - Debe traer solo los datos pedidos en la ruta de detalle de receta
-//   - Incluir los tipos de dieta asociados
-
-// - [ ] __GET /types__:                          // LISTO --> checkeado 
-//   - Obtener todos los tipos de dieta posibles
-//   - En una primera instancia, cuando no exista ninguno, deberán precargar la base de datos con los tipos de datos indicados por spoonacular [acá](https://spoonacular.com/food-api/docs#Diets)
-
-// - [ ] __POST /recipe__:                        // FUNCIONAAA --> checkeado 
-//   - Recibe los datos recolectados desde el formulario controlado de la ruta de creación de recetas por body
-//   - Crea una receta en la base de datos
 
 
 module.exports = router;

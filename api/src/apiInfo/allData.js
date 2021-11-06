@@ -11,6 +11,7 @@ const allApiData = async function(){
             id: el.id,
             name: el.title,
             summary: el.summary,
+            diets: el.diets,
             score: el.spoonacularScore,
             healthScore: el.healthScore,
             image: el.image,
