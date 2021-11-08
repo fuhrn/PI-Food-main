@@ -15,7 +15,6 @@ export default function SearchBar(){
         e.preventDefault();
         dispatch(searchByName(name))
     };
-    console.log(name)
 
     return (
         <div>

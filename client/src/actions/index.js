@@ -5,6 +5,7 @@ export const GET_DIETS = 'GET_DIETS'
 export const FILTER_BY_DIETS = 'FILTER_BY_DIETS'
 export const ORDER_BY_NAME = 'ORDER_BY_NAME'
 export const SEARCH_BY_NAME = 'SEARCH_BY_NAME'
+export const POST_RECIPE = 'POST_RECIPE'
 
 export function getRecipes() {
     return async function (dispatch) {
@@ -39,5 +40,12 @@ export function searchByName(name) {
     return async function (dispatch) {
         let json = await axios.get('http://localhost:3001/recipes?name=' + name);
         return dispatch({ type: SEARCH_BY_NAME, payload: json.data })
+    }
+};
+
+export function postRecipe(payload){
+    return async function(){
+        let json = await axios.post('http://localhost:3001/recipe', payload)
+        return json
     }
 }

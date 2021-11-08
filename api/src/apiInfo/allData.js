@@ -11,7 +11,7 @@ const allApiData = async function(){
             id: el.id,
             name: el.title,
             summary: el.summary,
-            diets: el.diets,
+            diets: el.diets.map( d => { return { name: d}}),
             score: el.spoonacularScore,
             healthScore: el.healthScore,
             image: el.image,

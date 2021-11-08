@@ -19,7 +19,6 @@ export default function Home() {
 
     },[tomas])
 
-
     const [currentPage, setCurrentPage] = useState(1);    // pagina que ira cambiando
     const [recipesPerPage, setRecipesPerPage] = useState(9); // self-explanatory
     const lastRecipe = recipesPerPage * currentPage; //9     // indice ultima receta renderizada

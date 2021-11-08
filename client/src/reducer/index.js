@@ -1,4 +1,4 @@
-import { GET_RECIPES, GET_DIETS, FILTER_BY_DIETS, ORDER_BY_NAME, SEARCH_BY_NAME } from "../actions";
+import { GET_RECIPES, GET_DIETS, FILTER_BY_DIETS, ORDER_BY_NAME, SEARCH_BY_NAME, POST_RECIPE } from "../actions";
 
 const initialState = {
     recipes: [],
@@ -27,7 +27,6 @@ const reducer = function (state = initialState, action) {
                 recipes: recipesWithDiet
             }
         case ORDER_BY_NAME:
-            // const recipesByName = state.recipes
             const recipesSorted = action.payload === 'asc' ?
             state.recipes.sort((a,b) => {
                 if(a.name > b.name) return 1;
@@ -47,7 +46,7 @@ const reducer = function (state = initialState, action) {
             return {
                 ...state,
                 recipes: action.payload
-            }
+            };
         default:
             return state
     }
