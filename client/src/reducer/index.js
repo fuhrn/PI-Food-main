@@ -1,35 +1,54 @@
-import { GET_RECIPES, GET_DIETS, FILTER_BY_DIETS } from "../actions";
+import { GET_RECIPES, GET_DIETS, FILTER_BY_DIETS, ORDER_BY_NAME, SEARCH_BY_NAME } from "../actions";
 
 const initialState = {
     recipes: [],
+    recipesCopyState: [],
     diets: []
 }
 
 const reducer = function (state = initialState, action) {
-    switch(action.type){
+    switch (action.type) {
         case GET_RECIPES:
-            return{
+            return {
                 ...state,
-                recipes: action.payload
+                recipes: action.payload,
+                recipesCopyState: action.payload
             }
         case GET_DIETS:
-            return{
+            return {
                 ...state,
                 diets: action.payload
             }
         case FILTER_BY_DIETS:
-            const diets = state.diets
-            const filteredDiets = diets.filter( d => d.name === action.payload)
-            const recipes = state.recipes
-            // const recipesWithDiet = recipes.filter( d => )
-            console.log('aca diets', diets)
-            console.log('aca recipes', recipes)
-            console.log('aca filtered', filteredDiets)
-            return{
+            const recipes = state.recipesCopyState
+            const recipesWithDiet = action.payload === 'all' ? recipes : recipes.filter(d => d.diets.includes(action.payload))
+            return {
                 ...state,
-                filteredDiets
+                recipes: recipesWithDiet
             }
-        default :
+        case ORDER_BY_NAME:
+            // const recipesByName = state.recipes
+            const recipesSorted = action.payload === 'asc' ?
+            state.recipes.sort((a,b) => {
+                if(a.name > b.name) return 1;
+                if(b.name > a.name) return -1;
+                return 0;
+            }) :
+            state.recipes.sort((a,b) => {
+                if(a.name > b.name) return -1;
+                if(b.name > a.name) return 1;
+                return 0;
+            });
+            return {
+                ...state,
+                recipes: recipesSorted
+            }
+        case SEARCH_BY_NAME:
+            return {
+                ...state,
+                recipes: action.payload
+            }
+        default:
             return state
     }
 };

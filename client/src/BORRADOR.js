@@ -20,3 +20,5 @@ array = [
         name,
     }
 ]
+
+// LAS DIETS DE LAS RECETAS DE LA API AHORA VIENEN EN FORMA DE ARRAY DE STRINGS !!!!
