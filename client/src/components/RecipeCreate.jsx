@@ -6,6 +6,8 @@ import { postRecipe } from "../actions";
 export default function RecipeCreate() {
     const dispatch = useDispatch();
     const diets = useSelector(state => state.diets)
+    
+    // probar hacer la validacion de datos
 
     const [post, setPost] = useState({
         name: '',
@@ -16,25 +18,32 @@ export default function RecipeCreate() {
         stepByStep: '',
         diets: []
     })
-    function handleInputChange(e){
+    function handleInputChange(e) {
         setPost({
             ...post,
             [e.target.name]: e.target.value
         });
     };
 
-    function handleSubmit(e){
+    function handleSubmit(e) {
         e.preventDefault();
         dispatch(postRecipe(post))
         alert('¡Receta creada con éxito!')
     };
 
-    function handleSelectDiets(e){
+    function handleSelectDiets(e) {
         setPost({
             ...post,
             diets: [...post.diets, e.target.value]
         })
-    }
+    };
+
+    function handleDietDelete(diet) {
+        setPost({
+            ...post,
+            diets: post.diets.filter(elemet => elemet !== diet)
+        })
+    };
 
     return (
         <div>
@@ -72,9 +81,13 @@ export default function RecipeCreate() {
                         ))
                     }
                 </select>
-                <p>{post.diets.map(d => d + ', ')}</p>
                 <button type='submit' >¡Crear!</button>
             </form>
+            {post.diets.map(d => <div>
+                <p>{d}</p>
+                <button onClick={() => handleDietDelete(d)}>X</button>
+            </div>
+            )}
         </div>
     )
 }

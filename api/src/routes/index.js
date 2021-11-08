@@ -73,7 +73,6 @@ router.post('/recipe', async (req, res) => {
                 name: d
             }
         })
-        console.log('este es el dbDiet', dbDiet)
         newRecipe.addDiet(dbDiet[0]);
     })
     res.send('¡Receta creada con éxito!')
