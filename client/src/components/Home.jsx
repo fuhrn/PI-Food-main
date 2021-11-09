@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux'
-import { getRecipes, getDiets, filterByDiets, orderByName } from "../actions";
+import { getRecipes, getDiets, filterByDiets, orderByName, orderByScore, recipeDetail } from "../actions";
 import { Link } from "react-router-dom";
 import Card from "./Card";
 import Paginate from "./Paginate";
@@ -14,10 +14,11 @@ export default function Home() {
     useEffect(() => {
         dispatch(getRecipes());
         dispatch(getDiets());
+        dispatch(recipeDetail(716426))
     }, [dispatch]);
     useEffect(() => {
 
-    },[tomas])
+    }, [tomas])
 
     const [currentPage, setCurrentPage] = useState(1);    // pagina que ira cambiando
     const [recipesPerPage, setRecipesPerPage] = useState(9); // self-explanatory
@@ -43,6 +44,11 @@ export default function Home() {
         tomas ? setTomas(false) : setTomas(true)
     };
 
+    function handleOrderByScore(e) {
+        dispatch(orderByScore(e.target.value))
+        tomas ? setTomas(false) : setTomas(true)
+    };
+
     return (
         <div>
             <Link to='/recipe'>¡Crea tu propia receta!</Link>
@@ -51,9 +57,17 @@ export default function Home() {
                 Recargar recetas
             </button>
             <div>
-                <select onChange={e => handleOrderByName(e)}>
-                    <option value="asc">Ascendente</option>
-                    <option value="desc">Descendente</option>
+                <select onChange={e => handleOrderByName(e)} >
+                    <optgroup label='Ordenar alfabéticamente' >
+                        <option value="asc">Ascendente</option>
+                        <option value="desc">Descendente</option>
+                    </optgroup>
+                </select>
+                <select onChange={e => handleOrderByScore(e)} >
+                    <optgroup label='Ordenar por Puntaje' >
+                        <option value="desc">Puntaje mas alto</option>
+                        <option value="asc">Puntaje mas bajo</option>
+                    </optgroup>
                 </select>
 
                 <select onChange={e => handleFilterByDiets(e)}>
@@ -73,7 +87,11 @@ export default function Home() {
                 {
                     currentRecipes && currentRecipes.map(el => {
                         return (
-                            <Card img={el.image} name={el.name} diet={el.diets} key={el.id} />
+                            <div>
+                                <Link to={'/' + el.id}>
+                                    <Card img={el.image} name={el.name} diet={el.diets} key={el.id} />
+                                </Link>
+                            </div>
                         )
                     })
                 }

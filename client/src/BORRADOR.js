@@ -4,12 +4,12 @@ array = [
         id: el.id,
         name: el.title,
         summary: el.summary,
-        diets: el.diets,
+        diets: el.diets, // array de objetos {name: diet}
         score: el.spoonacularScore,
         healthScore: el.healthScore,
         image: el.image,
         createdInDb: false,
-        analyzedInstructions: el.analyzedInstructions[0]?.steps
+        instructions: el.analyzedInstructions[0]?.steps
     }
 ]
 

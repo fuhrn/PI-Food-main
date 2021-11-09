@@ -25,10 +25,10 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false
     },
-    "healthy food level": {
+    healthScore: {
       type: DataTypes.INTEGER
     },
-    "step by step": {
+    instructions: {
       type: DataTypes.TEXT
     },
     createdInDb: {

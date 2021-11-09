@@ -16,7 +16,7 @@ const allApiData = async function(){
             healthScore: el.healthScore,
             image: el.image,
             createdInDb: false,
-            analyzedInstructions: el.analyzedInstructions[0]?.steps
+            instructions: el.analyzedInstructions[0]?.steps
         }
     })
     return apiInfo

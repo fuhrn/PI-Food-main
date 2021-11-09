@@ -64,8 +64,8 @@ router.post('/recipe', async (req, res) => {
         summary,
         score,
         image,
-        "healthy food level": healthScore,
-        "step by step": stepByStep
+        healthScore: healthScore,
+        instructions: stepByStep
     });
     diets.map( async d => {
         const dbDiet = await Diet.findOrCreate({
