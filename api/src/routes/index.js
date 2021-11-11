@@ -28,14 +28,12 @@ router.get('/recipes', async (req, res, next) => {
     }
 });
 
-// precargar primero la bd con los tipos de dieta
-// INCLUIR TIPOS DE DIETA
 router.get('/recipes/:id', async (req, res, next) => {
     const {id} = req.params;
     // traer todas las recetas, filtrar por id e incluir el tipo de dieta asociado
     const recipes = await model.allData();
     if(id){
-        const recipesID = await recipes.filter(r => r.id === parseInt(id));
+        const recipesID = await recipes.filter(r => r.id == id);
         recipesID.length ?
         res.send(recipesID) :
         res.send('No se encontró receta :/')

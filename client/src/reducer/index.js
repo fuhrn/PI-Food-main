@@ -1,4 +1,4 @@
-import { GET_RECIPES, GET_DIETS, FILTER_BY_DIETS, ORDER_BY_NAME, SEARCH_BY_NAME, ORDER_BY_SCORE, RECIPE_DETAIL } from "../actions";
+import { GET_RECIPES, GET_DIETS, FILTER_BY_DIETS, ORDER_BY_NAME, SEARCH_BY_NAME, ORDER_BY_SCORE, RECIPE_DETAIL, POST_RECIPE } from "../actions";
 
 const initialState = {
     recipes: [],
@@ -23,8 +23,10 @@ const reducer = function (state = initialState, action) {
         case FILTER_BY_DIETS:
             const recipes = state.recipesCopyState
             const recipesWithDiet = action.payload === 'all' ? recipes :
-            recipes.filter(r => { let names = r.diets.map(d => d.name)
-            if(names.includes(action.payload)) return r})
+                recipes.filter(r => {
+                    let names = r.diets.map(d => d.name)
+                    if (names.includes(action.payload)) return r
+                })
             return {
                 ...state,
                 recipes: recipesWithDiet
@@ -67,6 +69,10 @@ const reducer = function (state = initialState, action) {
                 ...state,
                 recipes: action.payload
             };
+        case POST_RECIPE:
+            return {
+                ...state
+            }
         case RECIPE_DETAIL:
             return {
                 ...state,

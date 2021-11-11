@@ -4,17 +4,20 @@ import Landing from './components/Landing';
 import Home from './components/Home';
 import RecipeCreate from './components/RecipeCreate';
 import RecipeDetail from './components/RecipeDetail';
+import NavBar from './components/NavBar';
+import React, { Fragment } from 'react';
 
 function App() {
   return (
     <BrowserRouter >
       <div className="App">
         <Switch>
+          {/* el react fragment por algun motivo al renderizar los componentess llama a la action recipeDetail
+    la cual trae el id que tenga la url, como en home no hay id, se rompe todo */}
           <Route exact path='/' component={Landing} />
           <Route path='/home' component={Home} />
           <Route path='/recipe' component={RecipeCreate} />
           <Route path='/:id' component={RecipeDetail} />
-
         </Switch>
       </div>
     </BrowserRouter>

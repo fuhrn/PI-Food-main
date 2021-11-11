@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import Card from "./Card";
 import Paginate from "./Paginate";
 import SearchBar from "./SearchBar";
+import NavBar from "./NavBar";
+import styles from "./Home.module.css"
 
 export default function Home() {
     const dispatch = useDispatch();
@@ -13,18 +15,19 @@ export default function Home() {
     const [tomas, setTomas] = useState(true)
     useEffect(() => {
         dispatch(getRecipes());
-        dispatch(getDiets());
-        dispatch(recipeDetail(716426))
+        setLoading(false);
     }, [dispatch]);
+    
     useEffect(() => {
-
-    }, [tomas])
+        dispatch(getDiets());
+    }, [])
 
     const [currentPage, setCurrentPage] = useState(1);    // pagina que ira cambiando
     const [recipesPerPage, setRecipesPerPage] = useState(9); // self-explanatory
     const lastRecipe = recipesPerPage * currentPage; //9     // indice ultima receta renderizada
     const firstRecipe = lastRecipe - recipesPerPage; //0         // indice primera receta renderizada
     const currentRecipes = recipes.slice(firstRecipe, lastRecipe); // las 9 recetas que se iran mostrando en cda pág
+    const [loading, setLoading] = useState(true)
 
     const paginate = (number) => {
         setCurrentPage(number)
@@ -50,9 +53,9 @@ export default function Home() {
     };
 
     return (
-        <div>
-            <Link to='/recipe'>¡Crea tu propia receta!</Link>
-            <h1>Mi proyecto individual de recetas :)</h1>
+        <div className={styles.divHome}>
+            {/* probar hacer un componente LOADING aqui con un ternario, onda loading ? Loading : todo lo demas */}
+            <NavBar />
             <button onClick={e => handleButton(e)}>
                 Recargar recetas
             </button>
@@ -78,19 +81,18 @@ export default function Home() {
                         ))
                     }
                 </select>
-                <SearchBar />
                 <Paginate
                     recipesPerPage={recipesPerPage}
                     recipes={recipes?.length}
                     paginate={paginate}
+                    currentPage={currentPage}
                 />
                 {
                     currentRecipes && currentRecipes.map(el => {
                         return (
                             <div>
-                                <Link to={'/' + el.id}>
-                                    <Card img={el.image} name={el.name} diet={el.diets} key={el.id} />
-                                </Link>
+                                <Card img={el.image} name={el.name} diet={el.diets} key={el.id} />
+                                <Link to={'/' + el.id}>Ver detalles de la receta</Link>
                             </div>
                         )
                     })

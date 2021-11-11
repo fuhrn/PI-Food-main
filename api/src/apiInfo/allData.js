@@ -16,7 +16,9 @@ const allApiData = async function(){
             healthScore: el.healthScore,
             image: el.image,
             createdInDb: false,
-            instructions: el.analyzedInstructions[0]?.steps
+            instructions: el.analyzedInstructions[0]?.steps.map(paso => {
+                return `<b>${paso.number}</b> ${paso.step}<br>`
+            })
         }
     })
     return apiInfo

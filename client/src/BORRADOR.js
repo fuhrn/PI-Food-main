@@ -9,7 +9,9 @@ array = [
         healthScore: el.healthScore,
         image: el.image,
         createdInDb: false,
-        instructions: el.analyzedInstructions[0]?.steps
+        instructions: el.analyzedInstructions[0]?.steps.map(step => {
+            return `<b>${step.number}</b> ${step.name}`
+        })
     }
 ]
 

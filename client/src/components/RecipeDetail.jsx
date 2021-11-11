@@ -1,5 +1,3 @@
-// ACA FIJARSE BIEN PORQUE CAPAZ HAYA QUE CAMBIAR COMO SE MANDA LA DATA DE LAS INSTRUCCIONES
-// DESDE EL FORMULARIO. EL TIPO DE DATO ES STRING, PERO DE LA API VIENE UN ARRAY CON OBJETOS
 
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,35 +5,34 @@ import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { recipeDetail } from "../actions";
 
-export default function RecipeDetail(){
+export default function RecipeDetail(params){
     const dispatch = useDispatch();
     const {id} = useParams();
-
+    // const [localR, setLocalR] = useState([]);
+    console.log(id)
     useEffect(() => {
         dispatch(recipeDetail(id));
     }, [dispatch]);
-
+    
     const detailedRecipe = useSelector(state => state.detail)
-    const [localR, setLocalR] = useState([]);
-    useEffect(() =>{
-        setLocalR(detailedRecipe)
-    }, [detailedRecipe])
-    
-    
+    console.log(detailedRecipe)
+
+    // useEffect(() =>{
+    //     setLocalR(detailedRecipe)
+    // }, [detailedRecipe])    
     return (
         <div>
             {
-                detailedRecipe ?
+                detailedRecipe.length > 0 ?
                 <div>
                     <h1>{detailedRecipe[0].name}</h1>
-                    <img src={detailedRecipe[0].image} />
+                    <img src={detailedRecipe[0].image} alt='img not found' width="400px" height="400px"/>
                     <h3>Puntuación: {detailedRecipe[0].score}</h3>
                     <h3>Nivel de comida saludable: {detailedRecipe[0].healthScore}</h3>
                     <h3>Paso a paso:</h3>
-
+                    <p dangerouslySetInnerHTML={{ __html: detailedRecipe[0].instructions }}></p>
                     <h3>Resumen del plato:</h3><p dangerouslySetInnerHTML={{ __html: detailedRecipe[0].summary }}></p>
-                    <h2>Tipos de dieta: {detailedRecipe[0].diets.map(d => d.name + ', ')}</h2>
-                    
+                    <h2>Tipos de dieta: {detailedRecipe[0].diets.map(d => d.name)}</h2>                    
                 </div> :
                 <p>Loading...</p>
             }

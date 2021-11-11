@@ -19,17 +19,25 @@ module.exports = (sequelize) => {
       allowNull: false
     },
     score: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
+      validate: {
+        min: 0,
+        max: 100
+      }
     },
     image: {
       type: DataTypes.STRING,
       allowNull: false
     },
     healthScore: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
+      validate: {
+        min: 0,
+        max: 100
+      }
     },
     instructions: {
-      type: DataTypes.TEXT
+      type: DataTypes.ARRAY(DataTypes.STRING)
     },
     createdInDb: {
       type: DataTypes.BOOLEAN,

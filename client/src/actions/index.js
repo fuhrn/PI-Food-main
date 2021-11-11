@@ -62,7 +62,6 @@ export function postRecipe(payload){
 export function recipeDetail(id){
     return async function(dispatch){
         let json = await axios.get('http://localhost:3001/recipes/' + id)
-        console.log(json)
         return dispatch({ type: RECIPE_DETAIL, payload: json.data})
     }
 }
