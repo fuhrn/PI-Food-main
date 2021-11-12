@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { postRecipe, getDiets } from "../actions";
 import NavBar from "./NavBar";
+import styles from './RecipeCreate.module.css'
 
 
 function validate(post) {
@@ -63,12 +64,11 @@ export default function RecipeCreate() {
 
     function handleSubmit(e) {
         e.preventDefault();
-        dispatch(postRecipe(post))
-        console.log(post)
-        alert('¡Receta creada con éxito!')
-        // if (Object.values(errors).length > 0) alert("Por favor rellenar todos los campos")
-        // else{
-        // }
+        if (Object.values(errors).length > 0) alert("Por favor rellenar todos los campos")
+        else{
+            dispatch(postRecipe(post))
+            alert('¡Receta creada con éxito!')
+        }
     };
 
     function handleSelectDiets(e) {
@@ -93,7 +93,7 @@ export default function RecipeCreate() {
     };
 
     return (
-        <div>
+        <div className={styles.createBkg}>
             <NavBar />
             <h2>Crea tu propia receta :)</h2>
             <form onSubmit={e => handleSubmit(e)}>

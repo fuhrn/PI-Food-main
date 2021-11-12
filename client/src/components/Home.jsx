@@ -17,7 +17,7 @@ export default function Home() {
         dispatch(getRecipes());
         setLoading(false);
     }, [dispatch]);
-    
+
     useEffect(() => {
         dispatch(getDiets());
     }, [])
@@ -51,9 +51,10 @@ export default function Home() {
         dispatch(orderByScore(e.target.value))
         tomas ? setTomas(false) : setTomas(true)
     };
+    console.log(diets)
 
     return (
-        <div className={styles.divHome}>
+        <div className={styles.home}>
             {/* probar hacer un componente LOADING aqui con un ternario, onda loading ? Loading : todo lo demas */}
             <NavBar />
             <button onClick={e => handleButton(e)}>
@@ -61,20 +62,18 @@ export default function Home() {
             </button>
             <div>
                 <select onChange={e => handleOrderByName(e)} >
-                    <optgroup label='Ordenar alfabéticamente' >
-                        <option value="asc">Ascendente</option>
-                        <option value="desc">Descendente</option>
-                    </optgroup>
+                    <option value="none" selected disabled hidden>Ordenar alfabéticamente</option>
+                    <option value="asc">Ascendente</option>
+                    <option value="desc">Descendente</option>
                 </select>
                 <select onChange={e => handleOrderByScore(e)} >
-                    <optgroup label='Ordenar por Puntaje' >
-                        <option value="desc">Puntaje mas alto</option>
-                        <option value="asc">Puntaje mas bajo</option>
-                    </optgroup>
+                    <option value="none" selected disabled hidden>Ordenar por Puntaje</option>
+                    <option value="desc">Puntaje mas alto</option>
+                    <option value="asc">Puntaje mas bajo</option>
                 </select>
 
                 <select onChange={e => handleFilterByDiets(e)}>
-                    <option value="all">todas</option>
+                    <option value="none" selected disabled hidden>Seleccionar por tipo de dieta</option>
                     {
                         diets && diets.map(d => (
                             <option value={d.name}>{d.name}</option>
@@ -87,16 +86,15 @@ export default function Home() {
                     paginate={paginate}
                     currentPage={currentPage}
                 />
-                {
-                    currentRecipes && currentRecipes.map(el => {
-                        return (
-                            <div>
-                                <Card img={el.image} name={el.name} diet={el.diets} key={el.id} />
-                                <Link to={'/' + el.id}>Ver detalles de la receta</Link>
-                            </div>
-                        )
-                    })
-                }
+                <div className={styles.cardsGrid}>
+                    {
+                        currentRecipes && currentRecipes.map(el => {
+                            return (
+                                <Card img={el.image} name={el.name} diet={el.diets} id={el.id} />
+                            )
+                        })
+                    }
+                </div>
             </div>
         </div>
     )
