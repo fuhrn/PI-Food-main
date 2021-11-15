@@ -10,7 +10,8 @@ export default function NavBar() {
             <li><Link to='/recipe' className={styles.a}>¡Crea tu propia receta!</Link> </li>
             <li><a href="https://www.linkedin.com/in/tomas-contreras-ba965113a/"
             target="_blank" rel="noreferrer" className={styles.a}>LinkedIn</a></li>
-            <SearchBar />
+            <li> <a href="https://www.google.com"
+            target="_blank" rel="noreferrer" className={styles.a}>About me</a></li>
             <li className={styles.slider}></li>
         </ul>
     )

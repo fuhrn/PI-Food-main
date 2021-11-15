@@ -51,7 +51,10 @@ export default function Home() {
         dispatch(orderByScore(e.target.value))
         tomas ? setTomas(false) : setTomas(true)
     };
-    console.log(diets)
+
+    function returnToFirstPage(){
+        setCurrentPage(1)
+    };
 
     return (
         <div className={styles.home}>
@@ -60,6 +63,7 @@ export default function Home() {
             <button onClick={e => handleButton(e)}>
                 Recargar recetas
             </button>
+            <SearchBar returnToFirstPage={returnToFirstPage}/>
             <div>
                 <select onChange={e => handleOrderByName(e)} >
                     <option value="none" selected disabled hidden>Ordenar alfabéticamente</option>

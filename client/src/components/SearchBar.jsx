@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { searchByName } from "../actions";
 
 
-export default function SearchBar(){
+export default function SearchBar({returnToFirstPage}){
     const dispatch = useDispatch();
     const [name, setName] = useState('');
     
@@ -14,6 +14,7 @@ export default function SearchBar(){
     function handleButton(e){
         e.preventDefault();
         dispatch(searchByName(name))
+        .then(() =>{ returnToFirstPage(); })        
     };
 
     return (
