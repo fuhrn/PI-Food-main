@@ -5,17 +5,15 @@ import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { recipeDetail } from "../actions";
 
-export default function RecipeDetail(params){
+export default function RecipeDetail(){
     const dispatch = useDispatch();
     const {id} = useParams();
     // const [localR, setLocalR] = useState([]);
-    console.log(id)
     useEffect(() => {
         dispatch(recipeDetail(id));
     }, [dispatch]);
     
     const detailedRecipe = useSelector(state => state.detail)
-    console.log(detailedRecipe)
 
     // useEffect(() =>{
     //     setLocalR(detailedRecipe)
@@ -42,9 +40,3 @@ export default function RecipeDetail(params){
         </div>
     )
 };
-
-// para healthscore de la bdd
-// validate:{
-//     min:1,
-//     max: 100
-// }

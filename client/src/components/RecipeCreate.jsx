@@ -20,7 +20,7 @@ function validate(post) {
     if (!post.healthScore || post.healthScore < 0 || post.healthScore > 100) {
         errors.healthScore = 'Ingresa un valor de 0 a 100'
     }
-    if (!post.stepByStep) {
+    if (!post.stepByStep.length) {
         errors.stepByStep = 'Escribe una serie de pasos sobre cómo cocinar la receta'
     }
     if (!post.image) {
@@ -72,17 +72,26 @@ export default function RecipeCreate() {
     };
 
     function handleSelectDiets(e) {
+        if(!post.diets.includes(e.target.value))
         setPost({
             ...post,
             diets: [...post.diets, e.target.value]
         });
+        setErrors(validate({
+            ...post,
+            diets: [...post.diets, e.target.value]
+        }));
     };
 
     function handleSteps(e) {
         setPost({
             ...post,
-            stepByStep: [...post.stepByStep, e.target.value]
-        })
+            stepByStep: [e.target.value]
+        });
+        setErrors(validate({
+            ...post,
+            stepByStep: e.target.value
+        }));
     }
 
     function handleDietDelete(diet) {
@@ -90,6 +99,11 @@ export default function RecipeCreate() {
             ...post,
             diets: post.diets.filter(elemet => elemet !== diet)
         })
+        setErrors(validate({
+            ...post,
+            diets: [...post.diets]
+        }));
+        
     };
 
     return (
@@ -140,10 +154,11 @@ export default function RecipeCreate() {
                     )}
                 </div>
                 <div>
-                    <select onChange={e => handleSelectDiets(e)}>
+                    <select onChange={e => handleSelectDiets(e)} defaultValue='default'>
+                    <option value="default" disabled >Elegir dietas</option>
                         {
                             diets && diets.map(d => (
-                                <option value={d.name}>{d.name}</option>
+                                <option value={d.name} key={d.id}>{d.name}</option>
                             ))
                         }
                     </select>
@@ -154,7 +169,7 @@ export default function RecipeCreate() {
                 <button type='submit' >¡Crear!</button>
             </form>
             {post.diets.map(d =>
-                <div>
+                <div key={d.id}>
                     <p>{d}</p>
                     <button onClick={() => handleDietDelete(d)}>X</button>
                 </div>

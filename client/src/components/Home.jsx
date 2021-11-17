@@ -65,22 +65,22 @@ export default function Home() {
             </button>
             <SearchBar returnToFirstPage={returnToFirstPage}/>
             <div>
-                <select onChange={e => handleOrderByName(e)} >
-                    <option value="none" selected disabled hidden>Ordenar alfabéticamente</option>
+                <select onChange={e => handleOrderByName(e)} defaultValue='default'>
+                    <option value="default" disabled >Ordenar alfabéticamente</option>
                     <option value="asc">Ascendente</option>
                     <option value="desc">Descendente</option>
                 </select>
-                <select onChange={e => handleOrderByScore(e)} >
-                    <option value="none" selected disabled hidden>Ordenar por Puntaje</option>
+                <select onChange={e => handleOrderByScore(e)} defaultValue='default'>
+                    <option value="default" disabled >Ordenar por Puntaje</option>
                     <option value="desc">Puntaje mas alto</option>
                     <option value="asc">Puntaje mas bajo</option>
                 </select>
 
-                <select onChange={e => handleFilterByDiets(e)}>
-                    <option value="none" selected disabled hidden>Seleccionar por tipo de dieta</option>
+                <select onChange={e => handleFilterByDiets(e)} defaultValue='default'>
+                    <option value="default" disabled >Seleccionar por tipo de dieta</option>
                     {
                         diets && diets.map(d => (
-                            <option value={d.name}>{d.name}</option>
+                            <option value={d.name} key={d.id}>{d.name}</option>
                         ))
                     }
                 </select>
@@ -94,7 +94,7 @@ export default function Home() {
                     {
                         currentRecipes && currentRecipes.map(el => {
                             return (
-                                <Card img={el.image} name={el.name} diet={el.diets} id={el.id} />
+                                <Card img={el.image} name={el.name} diet={el.diets} id={el.id} key={el.id} />
                             )
                         })
                     }
