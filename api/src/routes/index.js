@@ -3,6 +3,7 @@ const { Recipe, Diet } = require('../db')
 require('dotenv').config();
 const { API_KEY } = process.env
 const axios = require('axios');
+
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 const model = require('../apiInfo/allData')

@@ -59,7 +59,6 @@ export default function Home() {
     return (
         <div className={styles.home}>
             {/* probar hacer un componente LOADING aqui con un ternario, onda loading ? Loading : todo lo demas */}
-            <NavBar />
             <button onClick={e => handleButton(e)}>
                 Recargar recetas
             </button>

@@ -108,7 +108,6 @@ export default function RecipeCreate() {
 
     return (
         <div className={styles.createBkg}>
-            <NavBar />
             <h2>Crea tu propia receta :)</h2>
             <form onSubmit={e => handleSubmit(e)}>
                 <div>

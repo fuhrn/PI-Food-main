@@ -10,7 +10,7 @@ export default function Card({ img, name, diet, id }) {
                     <h2 className={styles.cardTitle}>{name}</h2>
                     <ul className={`${styles.cardDescription} ${styles.subtle}`}>{diet.map(d => <li key={d.name}>{d.name}</li>)}</ul>
                     <div >
-                        <Link to={'/' + id} className={styles.cardRead}>
+                        <Link to={'/recipe/' + id} className={styles.cardRead}>
                         Ver detalles de la receta</Link>
                     </div>
                 </div>

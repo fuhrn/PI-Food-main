@@ -12,12 +12,13 @@ function App() {
     <BrowserRouter >
       <div className={style.App}>
         <Switch>
-          {/* el react fragment por algun motivo al renderizar los componentess llama a la action recipeDetail
-    la cual trae el id que tenga la url, como en home no hay id, se rompe todo */}
           <Route exact path='/' component={Landing} />
-          <Route path='/home' component={Home} />
-          <Route path='/recipe' component={RecipeCreate} />
-          <Route path='/:id' component={RecipeDetail} />
+          <React.Fragment>
+            <NavBar/>
+            <Route exact path='/home' component={Home} />
+            <Route path='/create' component={RecipeCreate} />
+            <Route path='/recipe/:id' component={RecipeDetail} />
+          </React.Fragment>
         </Switch>
       </div>
     </BrowserRouter>
