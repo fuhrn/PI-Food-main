@@ -11,7 +11,6 @@ export const RECIPE_DETAIL = 'RECIPE_DETAIL'
 
 export function getRecipes() {
     return async function (dispatch) {
-        // NOTA* en el get/recipes, si no mando un nombre de receta por query, la ruta me manda todas las recetas ;)
         let json = await axios.get('http://localhost:3001/recipes');
         return dispatch({ type: GET_RECIPES, payload: json.data });
     }

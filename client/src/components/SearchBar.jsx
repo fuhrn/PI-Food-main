@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import { useDispatch } from "react-redux";
 import { searchByName } from "../actions";
+import styles from "./SearchBar.module.css"
 
 
 export default function SearchBar({returnToFirstPage}){
@@ -18,7 +19,7 @@ export default function SearchBar({returnToFirstPage}){
     };
 
     return (
-        <div>
+        <div className={styles.searchContainer}>
             <input type="text" placeholder='Buscar receta por nombre:' 
             onChange={(e) => handleChange(e)}/>
             <button type='submit' onClick={ (e) => handleButton(e)} >Buscar</button>
