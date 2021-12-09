@@ -14,7 +14,7 @@ export default function Card({ img, name, diet, id }) {
                         Ver detalles de la receta</Link>
                     </div>
                 </div>
-                <img src={img} alt="not found" width="200px" height="200px" className={styles.cardMedia} />
+                <img src={img} alt="not found" width="300px" height="300px" className={styles.cardMedia} />
             </div>
             <div className={styles.cardShadow}></div>
         </div>

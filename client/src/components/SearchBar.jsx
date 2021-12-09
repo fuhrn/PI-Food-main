@@ -20,9 +20,10 @@ export default function SearchBar({returnToFirstPage}){
 
     return (
         <div className={styles.searchContainer}>
-            <input type="text" placeholder='Buscar receta por nombre:' 
+            <input className={styles.searchInput} type="text" 
+            placeholder='Buscar receta por nombre:' 
             onChange={(e) => handleChange(e)}/>
-            <button type='submit' onClick={ (e) => handleButton(e)} >Buscar</button>
+            <button className={styles.buttonSearch} type='submit' onClick={ (e) => handleButton(e)} >Buscar</button>
         </div>
     )
 }

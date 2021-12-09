@@ -81,13 +81,15 @@ p{
     display: none;
 }
 textarea:focus, input:focus{
-    width: 50%;
+    max-width: 50%;
 }
+
 textarea:focus ~ p, input:focus ~p, select:focus ~p{
     display: block;
     margin: 2px;
     padding: 2px;
     border: 2px solid orangered;
+    border-radius: 5px;
     width: 40%;
 }
 .dietSelect{

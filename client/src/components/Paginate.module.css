@@ -1,3 +1,7 @@
+.center{
+    display: flex;
+    justify-content: center;
+}
 .center li{
     text-align: center;
 }
@@ -8,11 +12,12 @@
   
 .pagination li button {
     color: black;
-    float: left;
+    /* float: left; */
     padding: 8px 16px;
     text-decoration: none;
     transition: background-color .3s;
     border: 1px solid #ddd;
+    border-radius: 5px;
     margin: 0 4px;
 }
   
@@ -22,7 +27,7 @@
     border: 1px solid #777db8;
 }
   
-.pagination li button:hover:not(.hovered) {background-color: #ddd;}
+.pagination li button:hover:not(.hovered) {background-color: #fd684d; color: white;}
 
 
 /* changes:
