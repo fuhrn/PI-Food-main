@@ -10,7 +10,7 @@ export default function NavBar() {
         <ul className={styles.menu}>
             <li><Link to='/home' className={styles.a}>Home <FontAwesomeIcon icon={faHome} size="2x" style={{padding: '5px'}} /> </Link> </li>
             <li><Link to='/create' className={styles.a}>Create your own recipe! <FontAwesomeIcon icon={faWpforms} size="2x" style={{padding: '5px'}} /></Link> </li>
-            <li><a href="https://www.linkedin.com/in/tomas-contreras-ba965113a/"
+            <li><a href="https://www.linkedin.com/in/tomascontreras-fsd/"
             target="_blank" rel="noreferrer" className={styles.a}>LinkedIn <FontAwesomeIcon icon={faLinkedin} size="2x" style={{padding: '5px'}} /></a></li>
             <li> <a href="https://github.com/tomasignacioc"
             target="_blank" rel="noreferrer" className={styles.a}>GitHub <FontAwesomeIcon icon={faGithub} size="2x" style={{padding: '5px'}} /></a></li>

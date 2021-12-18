@@ -41,7 +41,7 @@ const dietLoader = async function(){
 
 // Syncing all the models at once.
 conn.sync({ force: false }).then(() => {
-  server.listen(3001, () => {
+  server.listen(process.env.PORT, () => {
 
     dietLoader();
 
