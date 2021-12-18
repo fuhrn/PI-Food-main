@@ -1,42 +1,43 @@
-
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { recipeDetail } from "../actions";
+import style from "./RecipeDetail.module.css"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSeedling , faStar} from '@fortawesome/free-solid-svg-icons'
 
-export default function RecipeDetail(){
+export default function RecipeDetail() {
     const dispatch = useDispatch();
-    const {id} = useParams();
-    // const [localR, setLocalR] = useState([]);
+    const { id } = useParams();
     useEffect(() => {
         dispatch(recipeDetail(id));
-    }, [dispatch]);
-    
-    const detailedRecipe = useSelector(state => state.detail)
+    }, [dispatch, id]);
 
-    // useEffect(() =>{
-    //     setLocalR(detailedRecipe)
-    // }, [detailedRecipe])    
+    const detailedRecipe = useSelector(state => state.detail)
+    console.log(detailedRecipe)
+
     return (
-        <div>
+        <div className={style.component}>
             {
                 detailedRecipe.length > 0 ?
-                <div>
-                    <h1>{detailedRecipe[0].name}</h1>
-                    <img src={detailedRecipe[0].image} alt='img not found' width="400px" height="400px"/>
-                    <h3>Puntuación: {detailedRecipe[0].score}</h3>
-                    <h3>Nivel de comida saludable: {detailedRecipe[0].healthScore}</h3>
-                    <h3>Paso a paso:</h3>
-                    <p dangerouslySetInnerHTML={{ __html: detailedRecipe[0].instructions }}></p>
-                    <h3>Resumen del plato:</h3><p dangerouslySetInnerHTML={{ __html: detailedRecipe[0].summary }}></p>
-                    <h2>Tipos de dieta: {detailedRecipe[0].diets.map(d => d.name)}</h2>                    
-                </div> :
-                <p>Loading...</p>
+                    <div>
+                        <h1 className={style.title}>{detailedRecipe[0].name}</h1>
+                        <div className={style.imgContainer}>
+                            <img src={detailedRecipe[0].image} alt='img not found'
+                                width="500px" height="400px" className={style.img} />
+                        </div>
+                        <div className={style.detailContainer}>
+                            <h3 className={style.h3}>Score: {detailedRecipe[0].score} <FontAwesomeIcon icon={faStar} size="1x" /> </h3>
+                            <h3 className={style.h3}>Healthy-Food level: {detailedRecipe[0].healthScore} <FontAwesomeIcon icon={faSeedling} size="1x" /></h3>
+                            <h3 className={style.h3}>Step-by-step:</h3>
+                            <p className={style.p} dangerouslySetInnerHTML={{ __html: detailedRecipe[0].instructions }}></p>
+                            <h3 className={style.h3}>Summary:</h3><p className={style.p} dangerouslySetInnerHTML={{ __html: detailedRecipe[0].summary }}></p>
+                            <h3 className={style.h3}>Diet types:</h3><ul className={style.p}>{detailedRecipe[0].diets.map(d => <li className={style.li}>{d.name}</li>)}</ul>
+                        </div>
+                    </div> :
+                    <p>Loading...</p>
             }
-            <Link to='/home'>
-                <button>Volver</button>
-            </Link>
         </div>
     )
 };

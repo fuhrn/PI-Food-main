@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux'
-import { getRecipes, getDiets, filterByDiets, orderByName, orderByScore, recipeDetail } from "../actions";
-import { Link } from "react-router-dom";
+import { getRecipes, getDiets, filterByDiets, orderByName, orderByScore } from "../actions";
 import Card from "./Card";
 import Paginate from "./Paginate";
 import SearchBar from "./SearchBar";
@@ -18,7 +17,7 @@ export default function Home() {
 
     useEffect(() => {
         dispatch(getDiets());
-    }, [])
+    }, [dispatch])
 
     const [currentPage, setCurrentPage] = useState(1);    // pagina que ira cambiando
     const [recipesPerPage, setRecipesPerPage] = useState(9); // self-explanatory
@@ -54,18 +53,18 @@ export default function Home() {
             <div className={styles.selectContainer}>
             <SearchBar returnToFirstPage={returnToFirstPage} />
                 <select onChange={e => handleOrderByName(e)} defaultValue='default' className={styles.filters}>
-                    <option value="default" disabled >Ordenar alfabéticamente</option>
-                    <option value="asc">Ascendente</option>
-                    <option value="desc">Descendente</option>
+                    <option value="default" disabled >Alphabetical order</option>
+                    <option value="asc">A-Z</option>
+                    <option value="desc">Z-A</option>
                 </select>
                 <select onChange={e => handleOrderByScore(e)} defaultValue='default' className={styles.filters}>
-                    <option value="default" disabled >Ordenar por Puntaje</option>
-                    <option value="desc">Puntaje mas alto</option>
-                    <option value="asc">Puntaje mas bajo</option>
+                    <option value="default" disabled >Order by score</option>
+                    <option value="desc">Higher</option>
+                    <option value="asc">Lower</option>
                 </select>
 
                 <select onChange={e => handleFilterByDiets(e)} defaultValue='default' className={styles.filters}>
-                    <option value="default" disabled >Seleccionar por tipo de dieta</option>
+                    <option value="default" disabled >Select by diet type</option>
                     {
                         diets && diets.map(d => (
                             <option value={d.name} key={d.id}>{d.name}</option>

@@ -55,8 +55,10 @@
   .cardDescription {
     display: inline-block;
     font-weight: 500;
+    font-size: x-large;
     line-height: 22px;
     margin: 10px 0;
+    text-transform: uppercase;
   }
   
   .cardRead {
@@ -74,7 +76,6 @@
   
   .cardRead:after {
     background-color: #b8bddd;
-    content: "";
     display: block;
     height: 1px;
     position: absolute;

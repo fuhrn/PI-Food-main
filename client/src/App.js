@@ -4,7 +4,7 @@ import Home from './components/Home';
 import RecipeCreate from './components/RecipeCreate';
 import RecipeDetail from './components/RecipeDetail';
 import NavBar from './components/NavBar';
-import React, { Fragment } from 'react';
+import React from 'react';
 import style from './App.module.css'
 
 function App() {
